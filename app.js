@@ -1,5 +1,6 @@
 //Variable global
 const URL1 = "https://rickandmortyapi.com/api/character";
+const URL2 = "https://rickandmortyapi.com/api/character/?name="
 //traer imput a javascript
 const txtCharacter = document.getElementById('txt-character');
 //traer contenedor de cards
@@ -47,3 +48,11 @@ const generateAllCharacters = async () => {
 
 window.addEventListener('DOMContentLoaded',generateAllCharacters);
 
+//Finder functions
+const getCharacterByName = async (event) => {
+    containerCards.innerHTML = ""; //va a dejar vacio todo lo que tenía el contenedor (no recomendable)
+    const data = await getAPI(URL2+event.target.value);
+    data.map(character => createCards(character));
+}
+
+txtCharacter.addEventListener('keyup',getCharacterByName);
